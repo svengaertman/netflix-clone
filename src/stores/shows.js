@@ -17,6 +17,11 @@ export const useShowsStore = defineStore({
 		getGenres() {
 			return this.genres;
 		},
+
+		getShowsByGenre: (state) => {
+			return (genre) =>
+				state.allShows.filter((show) => show.genres.includes(genre));
+		},
 	},
 	actions: {
 		init() {
@@ -37,7 +42,6 @@ export const useShowsStore = defineStore({
 					payload[randomIntFromInterval(0, payload.length)]
 				);
 			}
-			console.log({ ...this.popularShows });
 		},
 
 		getGenresOfShows(payload) {

@@ -23,32 +23,42 @@ export default {
 		};
 	},
 
+	methods: {
+		initSlider() {
+			let options;
+
+			if (window.innerWidth < 1024) {
+				options = {
+					items: 2.2,
+					gutter: 10,
+					controls: false,
+				};
+			}
+
+			if (window.innerWidth >= 1024) {
+				options = {
+					items: 6.2,
+					gutter: 20,
+					controls: true,
+					slideBy: "page",
+				};
+			}
+
+			this.slider = tns({
+				container: this.$refs.slider,
+				nav: false,
+				loop: false,
+				...options,
+			});
+		},
+	},
+
+	mounted() {
+		this.initSlider();
+	},
+
 	updated() {
-		let options;
-
-		if (window.innerWidth < 1024) {
-			options = {
-				items: 2.2,
-				gutter: 10,
-				controls: false,
-			};
-		}
-
-		if (window.innerWidth >= 1024) {
-			options = {
-				items: 6.2,
-				gutter: 20,
-				controls: true,
-				slideBy: "page",
-			};
-		}
-
-		this.slider = tns({
-			container: this.$refs.slider,
-			nav: false,
-			loop: false,
-			...options,
-		});
+		// this.initSlider();
 	},
 };
 </script>
