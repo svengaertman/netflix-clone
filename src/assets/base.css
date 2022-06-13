@@ -34,6 +34,9 @@
   --color-text: var(--vt-c-text-light-1);
 
   --section-gap: 160px;
+  --container-gap: 20px;
+
+  --height-navbar: 70px;
 }
 
 @media (prefers-color-scheme: dark) {
