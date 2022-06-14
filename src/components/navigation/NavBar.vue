@@ -1,13 +1,14 @@
 <template>
 	<header>
 		<div class="container">
-			<img
-				alt="Vue logo"
-				class="logo"
-				src="@/assets/logo.svg"
-				width="125"
-				height="125"
-			/>
+			<RouterLink to="/"
+				><img
+					alt="Vue logo"
+					class="logo"
+					src="https://static.tvmaze.com/images/tvm-header-logo.png"
+					width="253"
+					height="80"
+			/></RouterLink>
 
 			<div class="wrapper">
 				<nav>
@@ -88,8 +89,8 @@ header {
 }
 
 .logo {
-	height: 30px;
-	width: 30px;
+	max-height: calc(var(--height-navbar) / 2);
+	width: auto;
 }
 
 nav {
