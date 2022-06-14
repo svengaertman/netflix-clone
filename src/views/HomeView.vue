@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<section class="section--overview">
 		<SliderSection
 			:data="store.getPopularShows"
 			name="Popular"
@@ -12,7 +12,7 @@
 				v-if="store.getShowsByGenre(genre) !== null"
 			></SliderSection>
 		</template>
-	</div>
+	</section>
 </template>
 <script>
 import SliderSection from "@/components/SliderSection.vue";
@@ -28,3 +28,9 @@ export default {
 	},
 };
 </script>
+
+<style scoped lang="scss">
+.section--overview {
+	margin-top: var(--container-gap);
+}
+</style>
