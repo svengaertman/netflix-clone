@@ -1,7 +1,8 @@
 <template>
 	<section class="slider-wrapper" :class="{ highlighted: highlighted }">
 		<div class="container">
-			<h1>{{ name }}</h1>
+			<h1 v-if="highlighted">{{ name }}</h1>
+			<h2 v-else>{{ name }}</h2>
 			<div class="slider row" ref="slider">
 				<div
 					class="slide"
@@ -61,7 +62,7 @@ export default {
 
 		/* width */
 		&::-webkit-scrollbar {
-			height: 8px;
+			height: 0px;
 		}
 
 		&::-webkit-scrollbar-thumb:horizontal {
@@ -70,32 +71,41 @@ export default {
 
 		/* Track */
 		&::-webkit-scrollbar-track {
-			background-color: #7a7a7a;
+			background-color: rgba(72, 72, 72, 0.5);
 			border-radius: 10px;
-			margin: 0 var(--bs-gutter-x);
+			margin: 0 calc(var(--bs-gutter-x) * 0.5);
 		}
 
 		/* Handle */
 		&::-webkit-scrollbar-thumb {
-			background: rgb(72, 72, 72);
+			background-color: rgba(122, 122, 122, 0.5);
 		}
 
 		/* Handle on hover */
 		&::-webkit-scrollbar-thumb:hover {
-			background: rgb(56, 56, 56);
+			background-color: rgb(122, 122, 122);
 		}
 
 		@media screen and (min-width: 768px) {
 			--bs-gutter-x: 1rem;
+			overflow-x: auto;
+
+			&::-webkit-scrollbar {
+				height: 8px;
+			}
 		}
 	}
 
 	&.highlighted {
-		padding-top: calc(var(--container-gap) * 2);
-		padding-bottom: calc(var(--container-gap) * 3);
+		padding-bottom: var(--container-gap);
 
 		h1 {
 			color: var(--color-heading);
+		}
+
+		@media screen and (min-width: 768px) {
+			padding-top: calc(var(--container-gap) * 2);
+			padding-bottom: calc(var(--container-gap) * 3);
 		}
 	}
 }

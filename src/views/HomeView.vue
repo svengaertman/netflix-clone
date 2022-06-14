@@ -28,9 +28,3 @@ export default {
 	},
 };
 </script>
-
-<style scoped lang="scss">
-.section--overview {
-	margin-top: var(--container-gap);
-}
-</style>

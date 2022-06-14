@@ -28,7 +28,6 @@ export default {
 .card {
 	width: 100%;
 	aspect-ratio: 42 / 59;
-	margin-bottom: var(--container-gap);
 	position: relative;
 	background-color: transparent;
 	overflow: hidden;
@@ -94,6 +93,10 @@ export default {
 		img {
 			transform: scale(1.1);
 		}
+	}
+
+	@media screen and (min-width: 768px) {
+		margin-bottom: var(--container-gap);
 	}
 }
 </style>

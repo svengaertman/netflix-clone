@@ -2,12 +2,12 @@
 	<section class="single-view" v-if="item">
 		<div class="container">
 			<div class="hero row">
-				<div class="col-6">
+				<div class="col-lg-6 image-col">
 					<div class="image-wrapper">
 						<img :src="item.image.original" alt="" />
 					</div>
 				</div>
-				<div class="col-6">
+				<div class="col-lg-6">
 					<h1>{{ item.name }}</h1>
 					<p>
 						⭐
@@ -79,9 +79,14 @@ export default {
 		color: var(--color-heading);
 	}
 }
+
+.image-col {
+	padding: 0;
+}
+
 .image-wrapper {
 	width: 100%;
-	height: 100%;
+	aspect-ratio: 9 / 14;
 	overflow: hidden;
 
 	img {

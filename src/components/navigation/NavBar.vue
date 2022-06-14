@@ -97,23 +97,34 @@ nav {
 	width: 100%;
 	font-size: 12px;
 	text-align: center;
-}
 
-nav a.router-link-exact-active {
-	color: var(--color-text);
-}
+	a {
+		display: inline-block;
+		padding: 0 1rem;
+		border-left: 1px solid var(--color-border);
 
-nav a.router-link-exact-active:hover {
-	background-color: transparent;
-}
+		&.router-link-exact-active {
+			color: var(--color-text);
+		}
 
-nav a {
-	display: inline-block;
-	padding: 0 1rem;
-	border-left: 1px solid var(--color-border);
-}
+		&:first-of-type {
+			border: 0;
+		}
+	}
 
-nav a:first-of-type {
-	border: 0;
+	input {
+		background-color: var(--color-background-soft);
+		border: 1px solid var(--color-background-soft);
+		padding: 0.5em 1em;
+		color: white;
+		border-radius: 5px;
+		transition: border-color 0.1s ease-in-out;
+
+		&:active,
+		&:focus {
+			outline: none;
+			border: 1px solid rgba(255, 255, 255, 0.3);
+		}
+	}
 }
 </style>
