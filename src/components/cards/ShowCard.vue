@@ -2,6 +2,7 @@
 	<div
 		class="card card--show"
 		@click.stop.prevent="this.$router.push(`/${slugifyText(item.name)}`)"
+		v-if="item"
 	>
 		<div class="image-wrapper">
 			<img :src="item.image.medium" alt="" />
@@ -20,10 +21,6 @@ export default {
 		slugifyText(input) {
 			return input.toLowerCase().replace(" ", "-");
 		},
-	},
-
-	mounted() {
-		// console.log(this.item);
 	},
 };
 </script>
@@ -45,7 +42,7 @@ export default {
 		margin-bottom: 0;
 
 		.rating {
-			font-size: 0em;
+			font-size: 0.9em;
 		}
 	}
 

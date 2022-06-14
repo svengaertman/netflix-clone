@@ -9,8 +9,12 @@
 				</div>
 				<div class="col-6">
 					<h1>{{ item.name }}</h1>
-					<p>⭐ {{ item.rating.average }}</p>
 					<p>
+						⭐
+						<span v-if="item.rating.average">{{ item.rating.average }}</span>
+						<span v-else>Rating unknown</span>
+					</p>
+					<p class="genres">
 						<span v-for="(genre, index) in item.genres" :key="index">{{
 							genre
 						}}</span>
@@ -24,9 +28,15 @@
 
 <script>
 import axios from "axios";
+import { useShowsStore } from "@/stores/shows.js";
 
 export default {
 	components: {},
+
+	setup() {
+		const store = useShowsStore();
+		return { store };
+	},
 
 	data() {
 		return {
@@ -49,6 +59,15 @@ export default {
 	mounted() {
 		this.fetchSingleShow(this.$route.params.id);
 	},
+
+	watch: {
+		$route(to, from) {
+			if (to.name === "home") {
+				return;
+			}
+			this.fetchSingleShow(this.$route.params.id);
+		},
+	},
 };
 </script>
 
@@ -68,6 +87,20 @@ export default {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+	}
+}
+
+.genres {
+	span {
+		+ span {
+			margin-left: 5px;
+		}
+
+		&:not(:last-child) {
+			&::after {
+				content: ",";
+			}
+		}
 	}
 }
 </style>
