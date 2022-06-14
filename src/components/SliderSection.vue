@@ -93,6 +93,10 @@ export default {
 	&.highlighted {
 		padding-top: calc(var(--container-gap) * 2);
 		padding-bottom: calc(var(--container-gap) * 3);
+
+		h1 {
+			color: var(--color-heading);
+		}
 	}
 }
 </style>

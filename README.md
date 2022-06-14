@@ -1,14 +1,5 @@
 # netflix-clone
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
 
@@ -34,8 +25,7 @@ npm run build
 npm run test:unit
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## Architectural decisions
+I have the most experience in Vue 2, therefore it seemed only logical to use Vue as framework. I haven't used Vue 3 a lot, but since it is the new default i made this application on Vue 3 and learned on to the go.
 
-```sh
-npm run lint
-```
+Vue 3 uses the new tooling Vite in combination with Pinia as state management and Vitest for testing.
