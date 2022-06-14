@@ -6,7 +6,6 @@ export const useShowsStore = defineStore({
 	state: () => ({
 		allShows: [],
 		popularShows: [],
-		numberOfPopularShows: 10,
 		genres: [],
 		singleShow: null,
 	}),
@@ -42,17 +41,8 @@ export const useShowsStore = defineStore({
 		},
 
 		createPopularShows(payload) {
-			const randomIntFromInterval = (min, max) => {
-				return Math.floor(Math.random() * (max - min + 1) + min);
-			};
-
-			for (var i = 0; i < this.numberOfPopularShows; i++) {
-				this.popularShows.push(
-					payload[randomIntFromInterval(0, payload.length)]
-				);
-			}
-
-			this.popularShows.sort((a, b) => b.rating.average - a.rating.average);
+			payload.sort((a, b) => b.rating.average - a.rating.average);
+			this.popularShows = payload.slice(0, 10);
 		},
 
 		getGenresOfShows(payload) {
