@@ -1,23 +1,25 @@
 <template>
 	<header>
-		<img
-			alt="Vue logo"
-			class="logo"
-			src="@/assets/logo.svg"
-			width="125"
-			height="125"
-		/>
+		<div class="container">
+			<img
+				alt="Vue logo"
+				class="logo"
+				src="@/assets/logo.svg"
+				width="125"
+				height="125"
+			/>
 
-		<div class="wrapper">
-			<nav>
-				<RouterLink to="/">Home</RouterLink>
-				<RouterLink to="/">Search</RouterLink>
-			</nav>
+			<div class="wrapper">
+				<nav>
+					<RouterLink to="/">Home</RouterLink>
+					<RouterLink to="/">Search</RouterLink>
+				</nav>
+			</div>
 		</div>
 	</header>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 header {
 	width: 100vw;
 	min-height: var(--height-navbar);
@@ -26,8 +28,6 @@ header {
 	left: 0;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
-	padding: 0 var(--container-gap);
 	background: linear-gradient(
 		0deg,
 		rgba(24, 24, 24, 0) 0%,
@@ -35,6 +35,12 @@ header {
 		rgba(24, 24, 24, 1) 80%
 	);
 	z-index: 99;
+
+	.container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
 }
 
 .logo {

@@ -1,21 +1,27 @@
 <template>
 	<section class="slider-wrapper">
-		<h1>{{ name }}</h1>
-		<div class="slider" ref="slider">
-			<div class="slide" v-for="(item, index) in data" :key="index">
-				<ShowCard :item="item"></ShowCard>
+		<div class="container">
+			<h1>{{ name }}</h1>
+			<div class="slider row" ref="slider">
+				<div
+					class="slide"
+					:class="highlighted === true ? 'col-3' : 'col-2'"
+					v-for="(item, index) in data"
+					:key="index"
+				>
+					<ShowCard :item="item"></ShowCard>
+				</div>
 			</div>
 		</div>
 	</section>
 </template>
 <script>
 import ShowCard from "@/components/cards/ShowCard.vue";
-import { tns } from "tiny-slider";
 
 export default {
 	components: { ShowCard },
 
-	props: ["data", "name"],
+	props: ["data", "name", "highlighted"],
 
 	data() {
 		return {
@@ -23,60 +29,54 @@ export default {
 		};
 	},
 
-	methods: {
-		initSlider() {
-			let options;
+	methods: {},
 
-			if (window.innerWidth < 1024) {
-				options = {
-					items: 2.2,
-					gutter: 10,
-					controls: false,
-				};
-			}
+	mounted() {},
 
-			if (window.innerWidth >= 1024) {
-				options = {
-					items: 6.2,
-					gutter: 20,
-					controls: true,
-					slideBy: "page",
-				};
-			}
-
-			this.slider = tns({
-				container: this.$refs.slider,
-				nav: false,
-				loop: false,
-				...options,
-			});
-		},
-	},
-
-	mounted() {
-		this.initSlider();
-	},
-
-	updated() {
-		// this.initSlider();
-	},
+	updated() {},
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .slider-wrapper {
 	width: 100%;
 	overflow: hidden;
-	padding-left: var(--container-gap);
 	margin-bottom: var(--container-gap);
 }
 
 .slider {
 	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: auto;
+
+	/* width */
+	&::-webkit-scrollbar {
+		height: 8px;
+	}
+
+	&::-webkit-scrollbar-thumb:horizontal {
+		border-radius: 10px;
+	}
+
+	/* Track */
+	&::-webkit-scrollbar-track {
+		background: #f1f1f1;
+		border-radius: 10px;
+		margin: 0 15px;
+	}
+
+	/* Handle */
+	&::-webkit-scrollbar-thumb {
+		background: #888;
+	}
+
+	/* Handle on hover */
+	&::-webkit-scrollbar-thumb:hover {
+		background: #555;
+	}
 }
 
 .slide {
-	width: 40vw;
 	aspect-ratio: 1 / 1;
 }
 </style>

@@ -12,13 +12,7 @@ import NavBar from "./components/navigation/NavBar.vue";
 </template>
 
 <style>
-@import "@/assets/base.css";
-
-#app {
-	max-width: 1600px;
-	margin: 0 auto;
-	font-weight: normal;
-}
+@import "@/assets/styles/base.scss";
 
 a,
 .green {

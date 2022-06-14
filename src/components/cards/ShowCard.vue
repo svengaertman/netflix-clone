@@ -7,7 +7,8 @@
 			<img :src="item.image.medium" alt="" />
 		</div>
 		<p class="text">
-			{{ item.name }}
+			{{ item.name }} <br />
+			<span class="rating">⭐ {{ item.rating.average }}</span>
 		</p>
 	</div>
 </template>
@@ -26,50 +27,66 @@ export default {
 	},
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 .card {
 	width: 100%;
 	aspect-ratio: 1 / 1;
 	margin-bottom: var(--container-gap);
 	position: relative;
-}
+	background-color: transparent;
+	overflow: hidden;
 
-.text {
-	position: absolute;
-	bottom: var(--container-gap);
-	left: var(--container-gap);
-	z-index: 2;
-	color: white;
-}
+	.text {
+		position: absolute;
+		bottom: calc(var(--container-gap) / 2);
+		left: calc(var(--container-gap) / 2);
+		z-index: 2;
+		color: white;
+		margin-bottom: 0;
 
-.image-wrapper {
-	width: 100%;
-	aspect-ratio: 1 / 1;
-	position: relative;
-}
+		.rating {
+			font-size: 0em;
+		}
+	}
 
-.image-wrapper::after {
-	content: "";
-	width: 100%;
-	height: 25%;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	background: linear-gradient(
-		0deg,
-		rgba(24, 24, 24, 1) 50%,
-		rgba(24, 24, 24, 0) 100%
-	);
-	opacity: 0.5;
-	z-index: 1;
-}
+	.image-wrapper {
+		width: 100%;
+		aspect-ratio: 1 / 1;
+		position: relative;
 
-img {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transition: transform 0.2s ease-in-out;
+		}
+
+		&::after {
+			content: "";
+			width: 100%;
+			height: 25%;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			background: linear-gradient(
+				0deg,
+				rgba(24, 24, 24, 1) 50%,
+				rgba(24, 24, 24, 0) 100%
+			);
+			opacity: 0.7;
+			z-index: 1;
+		}
+	}
+
+	&:hover {
+		cursor: pointer;
+
+		img {
+			transform: scale(1.1);
+		}
+	}
 }
 </style>

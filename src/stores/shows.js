@@ -8,6 +8,7 @@ export const useShowsStore = defineStore({
 		popularShows: [],
 		numberOfPopularShows: 10,
 		genres: [],
+		singleShow: null,
 	}),
 	getters: {
 		getPopularShows() {
@@ -19,8 +20,16 @@ export const useShowsStore = defineStore({
 		},
 
 		getShowsByGenre: (state) => {
-			return (genre) =>
-				state.allShows.filter((show) => show.genres.includes(genre));
+			return (genre) => {
+				const showsByGenre = state.allShows
+					.filter((show) => show.genres.includes(genre))
+					.sort((a, b) => b.rating.average - a.rating.average);
+
+				if (showsByGenre.length > 6) {
+					return showsByGenre.slice(0, 15);
+				}
+				return null;
+			};
 		},
 	},
 	actions: {
@@ -42,6 +51,8 @@ export const useShowsStore = defineStore({
 					payload[randomIntFromInterval(0, payload.length)]
 				);
 			}
+
+			this.popularShows.sort((a, b) => b.rating.average - a.rating.average);
 		},
 
 		getGenresOfShows(payload) {

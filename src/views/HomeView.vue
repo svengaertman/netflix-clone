@@ -1,10 +1,15 @@
 <template>
 	<div>
-		<SliderSection :data="store.getPopularShows" name="Popular"></SliderSection>
+		<SliderSection
+			:data="store.getPopularShows"
+			name="Popular"
+			:highlighted="true"
+		></SliderSection>
 		<template v-for="(genre, index) in store.getGenres" :key="index">
 			<SliderSection
-				:data="store.getShowsByGenre(genre).slice(0, 20)"
+				:data="store.getShowsByGenre(genre)"
 				:name="genre"
+				v-if="store.getShowsByGenre(genre) !== null"
 			></SliderSection>
 		</template>
 	</div>
