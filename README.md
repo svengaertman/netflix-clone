@@ -3,6 +3,8 @@
 
 ## Project Setup
 
+Requires NODE 16+
+
 ```sh
 npm install
 ```
