@@ -27,7 +27,7 @@ export default {
 <style scoped lang="scss">
 .card {
 	width: 100%;
-	aspect-ratio: 1 / 1;
+	aspect-ratio: 42 / 59;
 	margin-bottom: var(--container-gap);
 	position: relative;
 	background-color: transparent;
@@ -36,7 +36,7 @@ export default {
 	.text {
 		position: absolute;
 		bottom: calc(var(--container-gap) / 2);
-		left: calc(var(--container-gap) / 2);
+		left: var(--container-gap);
 		z-index: 2;
 		color: white;
 		margin-bottom: 0;
@@ -44,11 +44,15 @@ export default {
 		.rating {
 			font-size: 0.9em;
 		}
+
+		@media screen and (max-width: 768px) {
+			display: none;
+		}
 	}
 
 	.image-wrapper {
 		width: 100%;
-		aspect-ratio: 1 / 1;
+		height: 100%;
 		position: relative;
 
 		img {
@@ -64,7 +68,7 @@ export default {
 		&::after {
 			content: "";
 			width: 100%;
-			height: 25%;
+			height: 50%;
 			position: absolute;
 			bottom: 0;
 			left: 0;
@@ -75,6 +79,12 @@ export default {
 			);
 			opacity: 0.7;
 			z-index: 1;
+		}
+
+		@media screen and (max-width: 768px) {
+			&::after {
+				opacity: 0;
+			}
 		}
 	}
 

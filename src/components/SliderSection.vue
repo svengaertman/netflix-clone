@@ -5,7 +5,9 @@
 			<div class="slider row" ref="slider">
 				<div
 					class="slide"
-					:class="highlighted === true ? 'col-3' : 'col-2'"
+					:class="
+						highlighted === true ? 'col-xl-3 col-lg-4 col-6' : 'col-xl-2 col-3'
+					"
 					v-for="(item, index) in data"
 					:key="index"
 				>
@@ -48,6 +50,7 @@ export default {
 	}
 
 	.slider {
+		--bs-gutter-x: 0.5rem;
 		display: flex;
 		flex-wrap: nowrap;
 		overflow-x: auto;
@@ -67,25 +70,29 @@ export default {
 
 		/* Track */
 		&::-webkit-scrollbar-track {
-			background: #f1f1f1;
+			background-color: #7a7a7a;
 			border-radius: 10px;
-			margin: 0 15px;
+			margin: 0 var(--bs-gutter-x);
 		}
 
 		/* Handle */
 		&::-webkit-scrollbar-thumb {
-			background: #888;
+			background: rgb(72, 72, 72);
 		}
 
 		/* Handle on hover */
 		&::-webkit-scrollbar-thumb:hover {
-			background: #555;
+			background: rgb(56, 56, 56);
+		}
+
+		@media screen and (min-width: 768px) {
+			--bs-gutter-x: 1rem;
 		}
 	}
 
 	&.highlighted {
 		padding-top: calc(var(--container-gap) * 2);
-		padding-bottom: calc(var(--container-gap) * 4);
+		padding-bottom: calc(var(--container-gap) * 3);
 	}
 }
 </style>

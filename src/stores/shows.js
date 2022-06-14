@@ -7,7 +7,6 @@ export const useShowsStore = defineStore({
 		allShows: [],
 		popularShows: [],
 		genres: [],
-		singleShow: null,
 	}),
 	getters: {
 		getPopularShows() {

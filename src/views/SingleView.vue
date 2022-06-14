@@ -61,7 +61,7 @@ export default {
 	},
 
 	watch: {
-		$route(to, from) {
+		$route(to) {
 			if (to.name === "home") {
 				return;
 			}
@@ -74,6 +74,10 @@ export default {
 <style scoped lang="scss">
 .hero {
 	height: calc(100vh - var(--height-navbar) - 100px);
+
+	h1 {
+		color: var(--color-heading);
+	}
 }
 .image-wrapper {
 	width: 100%;
