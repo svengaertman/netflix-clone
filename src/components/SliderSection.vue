@@ -48,15 +48,23 @@ export default {
 		reveal(element) {
 			gsap.fromTo(element, { opacity: 0 }, { opacity: 1, duration: 1 });
 		},
+
+		hide(element) {
+			gsap.set(element, { opacity: 0 });
+		},
+
+		createTrigger(element) {
+			ScrollTrigger.create({
+				trigger: element,
+				start: "top bottom-=50px",
+				onEnter: (self) => this.reveal(self.trigger),
+			});
+		},
 	},
 
 	mounted() {
-		gsap.set(this.$refs.sliderWrapper, { opacity: 0 });
-		ScrollTrigger.create({
-			trigger: this.$refs.sliderWrapper,
-			start: "top bottom-=50px",
-			onEnter: (self) => this.reveal(self.trigger),
-		});
+		this.hide(this.$refs.sliderWrapper);
+		this.createTrigger(this.$refs.sliderWrapper);
 	},
 
 	updated() {},
