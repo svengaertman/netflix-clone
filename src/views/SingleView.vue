@@ -1,5 +1,5 @@
 <template>
-	<section class="single-view" v-if="item">
+	<section class="single-view" v-if="item" ref="item">
 		<div class="container">
 			<div class="hero row">
 				<div class="col-lg-6 image-col">
@@ -32,6 +32,7 @@
 <script>
 import axios from "axios";
 import { useShowsStore } from "@/stores/shows.js";
+import gsap from "gsap";
 
 export default {
 	components: {},
@@ -49,12 +50,21 @@ export default {
 
 	methods: {
 		fetchSingleShow(payload) {
+			gsap.set(this.$refs.item, { opacity: 0 });
 			axios
 				.get(
 					`https://api.tvmaze.com/search/shows?q=${payload.replace("-", " ")}`
 				)
 				.then((response) => {
 					this.item = response.data[0].show;
+
+					setTimeout(() => {
+						gsap.fromTo(
+							this.$refs.item,
+							{ opacity: 0 },
+							{ opacity: 1, duration: 1 }
+						);
+					}, 250);
 				});
 		},
 	},
@@ -75,6 +85,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.single-view {
+	opacity: 0;
+}
 .hero {
 	height: calc(100vh - var(--height-navbar) - 100px);
 

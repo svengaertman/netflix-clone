@@ -1,5 +1,9 @@
 <template>
-	<section class="slider-wrapper" :class="{ highlighted: highlighted }">
+	<section
+		class="slider-wrapper"
+		:class="{ highlighted: highlighted }"
+		ref="sliderWrapper"
+	>
 		<div class="container">
 			<h1 v-if="highlighted">{{ name }}</h1>
 			<h2 v-else>{{ name }}</h2>
@@ -20,6 +24,10 @@
 </template>
 <script>
 import ShowCard from "@/components/cards/ShowCard.vue";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default {
 	components: { ShowCard },
@@ -32,9 +40,20 @@ export default {
 		};
 	},
 
-	methods: {},
+	methods: {
+		reveal(element) {
+			gsap.fromTo(element, { opacity: 0 }, { opacity: 1, duration: 1 });
+		},
+	},
 
-	mounted() {},
+	mounted() {
+		gsap.set(this.$refs.sliderWrapper, { opacity: 0 });
+		ScrollTrigger.create({
+			trigger: this.$refs.sliderWrapper,
+			start: "top bottom-=50px",
+			onEnter: (self) => this.reveal(self.trigger),
+		});
+	},
 
 	updated() {},
 };
