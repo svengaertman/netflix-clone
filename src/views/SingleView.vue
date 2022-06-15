@@ -3,7 +3,10 @@
 		<div class="container">
 			<div class="hero row">
 				<div class="col-lg-6 image-col">
-					<div class="image-wrapper">
+					<div
+						class="image-wrapper"
+						v-if="item.image !== null && Object.keys(item.image).length > 0"
+					>
 						<img :src="item.image.original" alt="" />
 					</div>
 				</div>
