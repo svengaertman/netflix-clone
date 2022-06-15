@@ -1,17 +1,17 @@
 <template>
-	<div
+	<article
 		class="card card--show"
 		@click.stop.prevent="this.$router.push(`/${slugifyText(item.name)}`)"
 		v-if="item"
 	>
 		<div class="image-wrapper">
-			<img :src="item.image.medium" alt="" />
+			<img :src="item.image.medium" :alt="'Poster of ' + item.name" />
 		</div>
 		<p class="text">
 			{{ item.name }} <br />
 			<span class="rating">⭐ {{ item.rating.average }}</span>
 		</p>
-	</div>
+	</article>
 </template>
 <script>
 export default {
@@ -37,7 +37,7 @@ export default {
 		bottom: calc(var(--container-gap) / 2);
 		left: var(--container-gap);
 		z-index: 2;
-		color: white;
+		color: var(--color-heading);
 		margin-bottom: 0;
 
 		.rating {

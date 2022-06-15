@@ -3,7 +3,7 @@
 		<div class="container">
 			<RouterLink to="/"
 				><img
-					alt="Vue logo"
+					alt="Tvmaze logo"
 					class="logo"
 					src="https://static.tvmaze.com/images/tvm-header-logo.png"
 					width="253"
@@ -18,6 +18,7 @@
 						placeholder="Search for show..."
 						@keyup.enter="search"
 						v-model="searchInput"
+						aria-label="Search input"
 					/>
 				</nav>
 			</div>
@@ -116,7 +117,7 @@ nav {
 		background-color: var(--color-background-soft);
 		border: 1px solid var(--color-background-soft);
 		padding: 0.5em 1em;
-		color: white;
+		color: var(--color-heading);
 		border-radius: 5px;
 		transition: border-color 0.1s ease-in-out;
 

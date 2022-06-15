@@ -9,7 +9,7 @@
 					class="image-wrapper"
 					v-if="item.image !== null && Object.keys(item.image).length > 0"
 				>
-					<img :src="item.image.original" alt="" />
+					<img :src="item.image.original" :alt="'Poster of ' + item.name" />
 				</div>
 			</div>
 			<div class="col-lg-6">

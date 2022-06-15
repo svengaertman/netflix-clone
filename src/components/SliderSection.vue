@@ -1,23 +1,21 @@
 <template>
 	<section
-		class="slider-wrapper"
+		class="slider-wrapper container"
 		:class="{ highlighted: highlighted }"
 		ref="sliderWrapper"
 	>
-		<div class="container">
-			<h1 v-if="highlighted">{{ name }}</h1>
-			<h2 v-else>{{ name }}</h2>
-			<div class="slider row" ref="slider">
-				<div
-					class="slide"
-					:class="
-						highlighted === true ? 'col-xl-3 col-lg-4 col-6' : 'col-xl-2 col-3'
-					"
-					v-for="(item, index) in data"
-					:key="index"
-				>
-					<ShowCard :item="item"></ShowCard>
-				</div>
+		<h1 v-if="highlighted">{{ name }}</h1>
+		<h2 v-else>{{ name }}</h2>
+		<div class="slider row" ref="slider">
+			<div
+				class="slide"
+				:class="
+					highlighted === true ? 'col-xl-3 col-lg-4 col-6' : 'col-xl-2 col-3'
+				"
+				v-for="(item, index) in data"
+				:key="index"
+			>
+				<ShowCard :item="item"></ShowCard>
 			</div>
 		</div>
 	</section>
