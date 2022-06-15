@@ -1,7 +1,7 @@
 <template>
 	<section class="single-view container" v-if="item" ref="item">
 		<div class="back-link">
-			<router-link to="/">&larr; Back to overview</router-link>
+			<router-link :to="{ name: 'home' }">&larr; Back to overview</router-link>
 		</div>
 		<div class="hero row">
 			<div class="col-lg-6 image-col">
@@ -21,9 +21,12 @@
 						<span v-else>Rating unknown</span>
 					</p>
 					<p class="genres">
-						<span v-for="(genre, index) in item.genres" :key="index">{{
-							genre
-						}}</span>
+						<routerLink
+							v-for="(genre, index) in item.genres"
+							:key="index"
+							:to="'/genre/' + genre.toLowerCase()"
+							>{{ genre }}</routerLink
+						>
 					</p>
 					<span v-html="item.summary"></span>
 				</div>
@@ -38,11 +41,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="back-to-top">
-			<button @click="backToTop" ref="backToTopButton" class="button">
-				&uarr;
-			</button>
 		</div>
 	</section>
 </template>
@@ -174,8 +172,8 @@ export default {
 }
 
 .genres {
-	span {
-		+ span {
+	a {
+		+ a {
 			margin-left: 5px;
 		}
 
@@ -238,30 +236,6 @@ export default {
 				position: absolute;
 			}
 		}
-	}
-}
-
-.back-to-top {
-	position: fixed;
-	bottom: calc(var(--container-gap) * 1);
-	right: calc(var(--container-gap) * 1);
-	width: 3em;
-	height: 3em;
-
-	.button {
-		width: 100%;
-		height: 100%;
-		border-radius: 5px;
-		background-color: var(--color-text-link);
-		transition: background-color 0.1s ease-in-out, opacity 0.2s ease-in-out;
-
-		&:hover {
-			background-color: var(--color-text-link-darker);
-		}
-	}
-
-	@media screen and (min-width: 992px) {
-		display: none;
 	}
 }
 </style>

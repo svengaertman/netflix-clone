@@ -31,6 +31,7 @@ export default {
 	position: relative;
 	background-color: transparent;
 	overflow: hidden;
+	border-radius: 5px;
 
 	.text {
 		position: absolute;

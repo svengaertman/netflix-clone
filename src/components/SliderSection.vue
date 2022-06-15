@@ -5,7 +5,13 @@
 		ref="sliderWrapper"
 	>
 		<h1 v-if="highlighted">{{ name }}</h1>
-		<h2 v-else>{{ name }}</h2>
+		<h2 v-else>
+			<router-link
+				:to="{ name: 'genre', params: { id: name.toLowerCase() } }"
+				>{{ name }}</router-link
+			>
+		</h2>
+
 		<div class="slider row" ref="slider">
 			<div
 				class="slide"
@@ -120,7 +126,7 @@ export default {
 			color: var(--color-heading);
 		}
 
-		@media screen and (min-width: 768px) {
+		@media screen and (min-width: 992px) {
 			padding-top: calc(var(--container-gap) * 2);
 			padding-bottom: calc(var(--container-gap) * 3);
 		}

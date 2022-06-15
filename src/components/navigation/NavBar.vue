@@ -12,7 +12,18 @@
 
 			<div class="wrapper">
 				<nav>
-					<RouterLink to="/">Home</RouterLink>
+					<div class="dropdown">
+						<button class="genres">Genres</button>
+						<div class="dropdown-content">
+							<RouterLink
+								:to="{ name: 'genre', params: { id: genre } }"
+								v-for="(genre, index) in store.getGenres"
+								:key="index"
+							>
+								{{ genre }}
+							</RouterLink>
+						</div>
+					</div>
 					<input
 						type="text"
 						placeholder="Search for show..."
@@ -110,6 +121,7 @@ header {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		flex-wrap: nowrap;
 	}
 }
 
@@ -123,17 +135,56 @@ nav {
 	font-size: 12px;
 	text-align: center;
 
-	a {
+	.dropdown {
+		position: relative;
 		display: inline-block;
-		padding: 0 1rem;
-		border-left: 1px solid var(--color-border);
+		height: 100%;
+	}
 
-		&.router-link-exact-active {
-			color: var(--color-text);
+	.dropdown-content {
+		display: none;
+		position: absolute;
+		background-color: var(--color-background-soft);
+		border-radius: 5px;
+		width: fit-content;
+		min-width: 100px;
+		text-align: left;
+		padding: 1rem 1rem;
+		z-index: 1;
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+
+		a {
+			display: block;
+			padding: 0.1rem 0.5rem;
+			white-space: nowrap;
+
+			&.router-link-exact-active {
+				color: var(--color-text);
+			}
+
+			&:first-of-type {
+				border: 0;
+			}
 		}
+	}
 
-		&:first-of-type {
-			border: 0;
+	.dropdown:hover .dropdown-content {
+		display: block;
+	}
+
+	.genres {
+		display: block;
+		padding: 0.5em 2.5em;
+		border-radius: 5px;
+		margin-right: 10px;
+		background-color: var(--color-text-link-soft);
+		color: var(--color-heading);
+		transition: background-color 0.1s ease-in-out;
+
+		&:hover {
+			background-color: var(--color-text-link);
 		}
 	}
 
@@ -149,6 +200,16 @@ nav {
 		&:focus {
 			outline: none;
 			border: 1px solid rgba(255, 255, 255, 0.3);
+		}
+	}
+
+	@media screen and (max-width: 991px) {
+		.genres {
+			padding: 0.5em 1em;
+		}
+
+		input {
+			max-width: 60%;
 		}
 	}
 }

@@ -20,11 +20,15 @@ export const useShowsStore = defineStore({
 		getShowsByGenre: (state) => {
 			return (genre) => {
 				const showsByGenre = state.allShows
-					.filter((show) => show.genres.includes(genre))
+					.filter((show) => {
+						return show.genres.some(
+							(showGenre) => showGenre.toLowerCase() === genre.toLowerCase()
+						);
+					})
 					.sort((a, b) => b.rating.average - a.rating.average);
 
 				if (showsByGenre.length > 6) {
-					return showsByGenre.slice(0, 15);
+					return showsByGenre;
 				}
 				return null;
 			};
@@ -65,13 +69,23 @@ export const useShowsStore = defineStore({
 		},
 
 		getGenresOfShows(payload) {
+			this.genres = [];
+			const genreCounter = {};
 			payload.forEach((show) => {
 				show.genres.forEach((genre) => {
-					if (!this.genres.includes(genre)) {
-						this.genres.push(genre);
+					if (genreCounter.hasOwnProperty(genre)) {
+						genreCounter[genre] += 1;
+					} else {
+						genreCounter[genre] = 1;
 					}
 				});
 			});
+
+			for (const [key, value] of Object.entries(genreCounter)) {
+				if (value > 6) {
+					this.genres.push(key);
+				}
+			}
 		},
 	},
 });
