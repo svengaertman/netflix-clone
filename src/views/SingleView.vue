@@ -1,29 +1,30 @@
 <template>
-	<section class="single-view" v-if="item" ref="item">
-		<div class="container">
-			<div class="hero row">
-				<div class="col-lg-6 image-col">
-					<div
-						class="image-wrapper"
-						v-if="item.image !== null && Object.keys(item.image).length > 0"
-					>
-						<img :src="item.image.original" alt="" />
-					</div>
+	<section class="single-view container" v-if="item" ref="item">
+		<div class="back-link">
+			<router-link to="/">&larr; Back to overview</router-link>
+		</div>
+		<div class="hero row">
+			<div class="col-lg-6 image-col">
+				<div
+					class="image-wrapper"
+					v-if="item.image !== null && Object.keys(item.image).length > 0"
+				>
+					<img :src="item.image.original" alt="" />
 				</div>
-				<div class="col-lg-6">
-					<h1>{{ item.name }}</h1>
-					<p>
-						⭐
-						<span v-if="item.rating.average">{{ item.rating.average }}</span>
-						<span v-else>Rating unknown</span>
-					</p>
-					<p class="genres">
-						<span v-for="(genre, index) in item.genres" :key="index">{{
-							genre
-						}}</span>
-					</p>
-					<span v-html="item.summary"></span>
-				</div>
+			</div>
+			<div class="col-lg-6">
+				<h1>{{ item.name }}</h1>
+				<p>
+					⭐
+					<span v-if="item.rating.average">{{ item.rating.average }}</span>
+					<span v-else>Rating unknown</span>
+				</p>
+				<p class="genres">
+					<span v-for="(genre, index) in item.genres" :key="index">{{
+						genre
+					}}</span>
+				</p>
+				<span v-html="item.summary"></span>
 			</div>
 		</div>
 	</section>
@@ -97,7 +98,9 @@ export default {
 }
 
 .image-col {
-	padding: 0;
+	@media screen and (max-width: 768px) {
+		padding: 0;
+	}
 }
 
 .image-wrapper {
@@ -127,6 +130,14 @@ export default {
 				content: ",";
 			}
 		}
+	}
+}
+
+.back-link {
+	margin-bottom: var(--container-gap);
+
+	svg {
+		fill: rgb(0, 189, 126);
 	}
 }
 </style>

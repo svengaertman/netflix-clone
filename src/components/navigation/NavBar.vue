@@ -1,5 +1,5 @@
 <template>
-	<header>
+	<header class="navbar">
 		<div class="container">
 			<RouterLink to="/"
 				><img
