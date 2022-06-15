@@ -12,20 +12,37 @@
 					<img :src="item.image.original" :alt="'Poster of ' + item.name" />
 				</div>
 			</div>
-			<div class="col-lg-6">
-				<h1>{{ item.name }}</h1>
-				<p>
-					⭐
-					<span v-if="item.rating.average">{{ item.rating.average }}</span>
-					<span v-else>Rating unknown</span>
-				</p>
-				<p class="genres">
-					<span v-for="(genre, index) in item.genres" :key="index">{{
-						genre
-					}}</span>
-				</p>
-				<span v-html="item.summary"></span>
+			<div class="col-lg-6 info-col">
+				<div class="information">
+					<h1>{{ item.name }}</h1>
+					<p>
+						⭐
+						<span v-if="item.rating.average">{{ item.rating.average }}</span>
+						<span v-else>Rating unknown</span>
+					</p>
+					<p class="genres">
+						<span v-for="(genre, index) in item.genres" :key="index">{{
+							genre
+						}}</span>
+					</p>
+					<span v-html="item.summary"></span>
+				</div>
+				<h3 class="heading">Episodes</h3>
+				<div class="episodes">
+					<div class="episodes-list">
+						<EpisodeCard
+							v-for="(episode, index) in episodes"
+							:key="index"
+							:episode="episode"
+						/>
+					</div>
+				</div>
 			</div>
+		</div>
+		<div class="back-to-top">
+			<button @click="backToTop" ref="backToTopButton" class="button">
+				&uarr;
+			</button>
 		</div>
 	</section>
 </template>
@@ -34,9 +51,10 @@
 import axios from "axios";
 import { useShowsStore } from "@/stores/shows.js";
 import gsap from "gsap";
+import EpisodeCard from "../components/cards/EpisodeCard.vue";
 
 export default {
-	components: {},
+	components: { EpisodeCard },
 
 	setup() {
 		const store = useShowsStore();
@@ -46,6 +64,7 @@ export default {
 	data() {
 		return {
 			item: null,
+			episodes: null,
 		};
 	},
 
@@ -58,6 +77,7 @@ export default {
 				)
 				.then((response) => {
 					this.item = response.data[0].show;
+					this.fetchEpisodesOfShow(this.item.id);
 
 					setTimeout(() => {
 						gsap.fromTo(
@@ -67,6 +87,19 @@ export default {
 						);
 					}, 250);
 				});
+		},
+
+		fetchEpisodesOfShow(id) {
+			axios
+				.get(`https://api.tvmaze.com/shows/${id}/episodes`)
+				.then((response) => {
+					console.log(response.data);
+					this.episodes = response.data;
+				});
+		},
+
+		backToTop() {
+			window.scrollTo({ top: 0, behavior: "smooth" });
 		},
 	},
 
@@ -98,15 +131,19 @@ export default {
 }
 
 .image-col {
+	.image-wrapper {
+		width: 100%;
+		height: calc(100vh - 170px);
+	}
+
 	@media screen and (max-width: 768px) {
 		padding: 0;
 	}
 }
 
 .image-wrapper {
-	width: 100%;
-	aspect-ratio: 9 / 14;
 	overflow: hidden;
+	position: relative;
 
 	img {
 		position: absolute;
@@ -138,6 +175,76 @@ export default {
 
 	svg {
 		fill: rgb(0, 189, 126);
+	}
+}
+
+.info-col {
+	display: flex;
+	flex-direction: column;
+
+	.heading {
+		margin: var(--container-gap) 0;
+		color: var(--color-heading);
+	}
+
+	.episodes {
+		flex-grow: 1;
+		overflow-y: auto;
+
+		/* width */
+		&::-webkit-scrollbar {
+			width: 12px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			border-radius: 10px;
+		}
+
+		/* Track */
+		&::-webkit-scrollbar-track {
+			background-color: rgba(72, 72, 72, 0.5);
+			border-radius: 10px;
+			margin: 0 calc(var(--bs-gutter-x) * 0.5);
+		}
+
+		/* Handle */
+		&::-webkit-scrollbar-thumb {
+			background-color: rgba(122, 122, 122, 0.5);
+		}
+
+		/* Handle on hover */
+		&::-webkit-scrollbar-thumb:hover {
+			background-color: rgb(122, 122, 122);
+		}
+		.episodes-list {
+			@media screen and (min-width: 992px) {
+				position: absolute;
+			}
+		}
+	}
+}
+
+.back-to-top {
+	position: fixed;
+	bottom: calc(var(--container-gap) * 1);
+	right: calc(var(--container-gap) * 1);
+	width: 3em;
+	height: 3em;
+
+	.button {
+		width: 100%;
+		height: 100%;
+		border-radius: 5px;
+		background-color: var(--color-text-link);
+		transition: background-color 0.1s ease-in-out, opacity 0.2s ease-in-out;
+
+		&:hover {
+			background-color: var(--color-text-link-darker);
+		}
+	}
+
+	@media screen and (min-width: 992px) {
+		display: none;
 	}
 }
 </style>
