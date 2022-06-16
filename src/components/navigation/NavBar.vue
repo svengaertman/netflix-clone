@@ -177,6 +177,7 @@ nav {
 	.genres {
 		display: block;
 		padding: 0.5em 2.5em;
+		border: none;
 		border-radius: 5px;
 		margin-right: 10px;
 		background-color: var(--color-text-link-soft);

@@ -29,9 +29,9 @@
 <script>
 import ShowCard from "@/components/cards/ShowCard.vue";
 import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
+// import ScrollTrigger from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+// gsap.registerPlugin(ScrollTrigger);
 
 export default {
 	components: { ShowCard },
@@ -63,8 +63,8 @@ export default {
 	},
 
 	mounted() {
-		this.hide(this.$refs.sliderWrapper);
-		this.createTrigger(this.$refs.sliderWrapper);
+		// this.hide(this.$refs.sliderWrapper);
+		// this.createTrigger(this.$refs.sliderWrapper);
 	},
 
 	updated() {},

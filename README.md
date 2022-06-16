@@ -33,4 +33,4 @@ I have the most experience in Vue 2, therefore it seemed only logical to use Vue
 Vue 3 uses the new tooling Vite in combination with Pinia as state management and Vitest for testing.
 
 ## Testing
-I haven't had much experience with tests. In this assessment i started with creating tests in Vitest but after using GSAP i got a "TypeError: _win.matchMedia is not a function". I was unable to fix it before submitting the project.
+I haven't had much experience with tests. In this assessment i started with creating tests in Vitest but after using GSAP i got a "TypeError: _win.matchMedia is not a function". I was unable to fix it before submitting the project, so i disabled GSAP Scrolltrigger (which causes the error) in the SliderSection component.
