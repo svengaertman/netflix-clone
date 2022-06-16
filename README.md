@@ -32,6 +32,8 @@ I have the most experience in Vue 2, therefore it seemed only logical to use Vue
 
 Vue 3 uses the new tooling Vite in combination with Pinia as state management and Vitest for testing.
 
+I use the grid system of Bootstrap for easy containers, rows and columns. Furthermore i use scss for styling so i can nest classes. In this case i didn't use sass variables because i didn't need to. It would be a waste of the pre-processor and since the variables i use are easy and don't need difficult calculations i choose for regular css variables.
+
 ### Explanation
 #### Home screen / overview
 I have made an overview of the first 250 shows from the initial API call: Index. Filtered all of it by genre and displayed only if there are more than 6 items in that genre. Each genre on the overview has max. 15 items sorted on rating (high to low).
